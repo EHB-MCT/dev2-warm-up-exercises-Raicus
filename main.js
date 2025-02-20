@@ -2,6 +2,7 @@ import { getRandomScores, getStudentJSON, runTitle } from "./lib.js";
 
 runTitle();
 warmup1();
+warmup2();
 
 function warmup1() {
 	console.log("Exercise week 1");
@@ -27,7 +28,36 @@ function warmup1() {
 
 function warmup2() {
 	console.log("Exercise week 2");
-	const scores = getRandomScores(10);
+	let scores = getRandomScores(10);
+
+	document.querySelector("#button-2a").addEventListener("click", function () {
+		// TODO: sort
+		scores = scores.sort(function (a, b) {
+			if (a > b) {
+				return 1;
+			} else {
+				return -1;
+			}
+		});
+
+		const sum = scores.reduce(function (total, current) {
+			return total + current;
+		});
+
+		console.log(sum);
+
+		// TODO: ul toevoegen
+		let html = "<ul></ul>";
+
+		// TODO: li per scroe
+		scores.forEach(function (score) {
+			console.log(score);
+			//TODO: li toevoegen
+			html += `<li>${score}</li>`;
+		});
+		// TODO: toevoegen aan html
+		document.querySelector("#content-2").innerHTML = html;
+	});
 }
 
 function warmup3() {
