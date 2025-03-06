@@ -3,6 +3,8 @@ import { getRandomScores, getStudentJSON, runTitle } from "./lib.js";
 runTitle();
 warmup1();
 warmup2();
+warmup3();
+warmup4();
 
 function warmup1() {
 	console.log("Exercise week 1");
@@ -62,10 +64,48 @@ function warmup2() {
 
 function warmup3() {
 	let student = getStudentJSON();
+	// TODO: A omzetten naar JS object en loggen
+	const studentObject = JSON.parse(student);
+	document.querySelector("#button-3a").addEventListener("click", function () {
+		console.log(studentObject);
+	});
+
+	// TODO: B html renderen om webpagina
+	document.querySelector("#button-3b").addEventListener("click", function () {
+		document.querySelector(
+			"#content-3"
+		).innerHTML = `<h2>${studentObject.firstname}`;
+		document
+			.querySelector("#content-3")
+			.insertAdjacentHTML("beforeend", `${studentObject.age}`);
+	});
 }
 
 function warmup4() {
 	let main, min, max;
+
+	const URL =
+		"http://api.openweathermap.org/data/2.5/weather?q=Brussels&APPID=d7b955c4c268fe54649d6f0d702b39d1&units=metric";
+
+	fetch(URL)
+		.then(function (response) {
+			console.log("First part of response received...");
+			console.log(response);
+			return response.json();
+		})
+		.then(function (data) {
+			console.log(data);
+			renderHTML(data.main.temp, data.main.temp_min, data.main.temp_max);
+		});
+
+	function renderHTML(main, min, max) {
+		document.querySelector("#button-4b").addEventListener("click", function () {
+			document.querySelector("#content-4").innerHTML = `
+			<h2>Temp: ${main}°C</h2>
+			<h2>Min temp: ${min}°C</h2>
+			<h2>Max temp: ${max}°C</h2>`;
+		});
+	}
 }
 
 function warmup5() {}
